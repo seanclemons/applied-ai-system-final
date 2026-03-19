@@ -11,23 +11,116 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
+This simulation builds a content-based music recommender that matches songs to a user's taste profile using audio features and categorical labels. Unlike real-world systems that rely on millions of users' listening histories (collaborative filtering), this version focuses purely on song attributes — energy, mood, genre, valence, and acousticness — to compute a compatibility score for each song. The top-K scoring songs are returned as recommendations with a plain-language explanation of why each was chosen.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+Real-world recommenders like Spotify's Discover Weekly combine two strategies: **collaborative filtering** (finding users with similar listening histories and borrowing their taste) and **content-based filtering** (analyzing the audio attributes of songs themselves). At scale, Spotify processes billions of listening events and hundreds of audio features extracted from raw audio using machine learning models. This simulation focuses on content-based filtering with a small, hand-crafted dataset to make the logic transparent and inspectable.
 
-Some prompts to answer:
+**This version prioritizes:** matching a user's declared mood and genre context first, then fine-tuning by how close a song's energy and emotional tone (valence) are to the user's preference — mirroring the way a person might pick a playlist by vibe before worrying about specific sound texture.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+---
 
-You can include a simple diagram or bullet list if helpful.
+### Dataset
+
+`data/songs.csv` contains **18 songs** across a diverse range of genres and moods:
+
+| Genres | Moods |
+|---|---|
+| pop, indie pop, lofi, rock, jazz | happy, chill, intense, relaxed, moody |
+| synthwave, ambient, hip-hop, r&b | focused, nostalgic, romantic, peaceful |
+| classical, country, edm, metal, folk, funk | energetic, angry |
+
+---
+
+### Song Object Features
+
+Each `Song` uses the following attributes:
+
+| Feature | Type | Role in Scoring |
+|---|---|---|
+| `genre` | categorical | Hard boundary — highest weight match bonus |
+| `mood` | categorical | Use-case label — second highest weight |
+| `energy` | float 0–1 | Proximity scored against user's target energy |
+| `valence` | float 0–1 | Emotional positivity — proximity scored |
+| `acousticness` | float 0–1 | Organic vs. electronic texture — proximity scored |
+
+*(`tempo_bpm` and `danceability` are in the data and available for future expansion.)*
+
+---
+
+### UserProfile
+
+The user profile is a dictionary with these keys:
+
+```python
+user_prefs = {
+    "genre":       "pop",    # target genre (string)
+    "mood":        "happy",  # target mood context (string)
+    "energy":      0.8,      # target intensity (float 0–1)
+    "valence":     0.8,      # target emotional positivity (float 0–1)
+    "acousticness": 0.2,     # target texture (float 0–1)
+}
+```
+
+**Why this profile works for differentiation:** A user with `energy: 0.8` and `mood: happy` will clearly separate *Gym Hero* (pop/intense, energy 0.93) from *Library Rain* (lofi/chill, energy 0.35). Genre alone would miss *Rooftop Lights* (indie pop/happy) which is a strong match — so the numeric features catch cross-genre vibe alignment.
+
+---
+
+### Algorithm Recipe — Scoring Rule (one song)
+
+```
+score = (genre_match  × 2.0)
+      + (mood_match   × 1.0)
+      + (1 - |song.energy      - user.energy|)      × 1.5
+      + (1 - |song.valence     - user.valence|)     × 1.0
+      + (1 - |song.acousticness - user.acousticness|) × 0.5
+```
+
+- **Categorical match** = full weight if equal, 0 if not
+- **Proximity score** = `1 - |song_value - user_value|` (always 0–1 since features are on 0–1 scale)
+- **Maximum possible score** = 2.0 + 1.0 + 1.5 + 1.0 + 0.5 = **6.0**
+
+**Weight rationale:**
+- `genre` (2.0) — strongest style boundary; a metal fan won't enjoy ambient regardless of energy
+- `energy` (1.5) — most continuous and reliable vibe signal; paired with mood it defines intensity
+- `mood` (1.0) — important but sometimes genre already implies mood (rock → intense)
+- `valence` (1.0) — emotional positivity catches the happy/dark split within a genre
+- `acousticness` (0.5) — texture preference is flexible; lowest weight
+
+---
+
+### Ranking Rule (full catalog)
+
+1. Run the scoring rule on every song in the 18-song catalog
+2. Sort all `(song, score)` pairs in descending order
+3. Return the top `k` results, each with a plain-language explanation
+
+---
+
+### Data Flow — Mermaid Diagram
+
+```mermaid
+flowchart TD
+    A[User Profile\ngenre · mood · energy · valence · acousticness] --> B[Load songs.csv\n18 songs]
+    B --> C{For each song\nin catalog}
+    C --> D[Score genre match\n+2.0 if match]
+    C --> E[Score mood match\n+1.0 if match]
+    C --> F[Score energy proximity\n1 - energy diff × 1.5]
+    C --> G[Score valence proximity\n1 - valence diff × 1.0]
+    C --> H[Score acousticness proximity\n1 - acousticness diff × 0.5]
+    D & E & F & G & H --> I[Sum = total score\nmax 6.0]
+    I --> J[Rank all songs\nby score descending]
+    J --> K[Return Top K\nwith explanation]
+```
+
+---
+
+### Expected Bias
+
+> "This system may over-prioritize genre, causing songs with a perfect mood and energy match but a different genre label to rank lower than they deserve. A chill hip-hop track might lose to a mediocre lofi track just because the genre string matches. Additionally, the system treats all users as having the same 'taste shape' — it cannot learn that one user is flexible on genre but strict on energy."
 
 ---
 

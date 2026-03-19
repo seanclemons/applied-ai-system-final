@@ -1,11 +1,19 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,mood_tags
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,87,2020s,uplifting|bright|danceable
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,72,2020s,focused|dreamy|calm
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,65,2010s,aggressive|powerful|driving
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,78,2020s,calm|peaceful|focused
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,91,2020s,motivational|driving|energetic
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,55,2010s,dreamy|ethereal|peaceful
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,62,2010s,nostalgic|warm|mellow
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,74,2020s,nostalgic|cinematic|dark
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,68,2020s,focused|calm|minimal
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,83,2020s,uplifting|bright|warm
+11,Golden Hour Freestyle,CloudRap,hip-hop,nostalgic,0.65,95,0.72,0.74,0.30,77,2020s,nostalgic|smooth|reflective
+12,Velvet Underground,Rosa & The Keys,r&b,romantic,0.55,88,0.78,0.68,0.45,81,2010s,romantic|smooth|warm
+13,Moonlight Remix,Pixel Classical,classical,peaceful,0.22,52,0.68,0.30,0.95,59,2020s,peaceful|ethereal|calm
+14,Two-Step Dust,Prairie Echo,country,happy,0.70,105,0.83,0.76,0.72,70,2010s,uplifting|warm|nostalgic
+15,Drop Zone,Bass Cartel,edm,energetic,0.97,140,0.62,0.91,0.03,88,2020s,euphoric|driving|energetic
+16,Iron Crown,Ashfall,metal,angry,0.96,168,0.22,0.55,0.08,61,2010s,aggressive|powerful|dark
+17,Autumn Porch,The Willows,folk,nostalgic,0.33,82,0.74,0.49,0.93,66,2010s,nostalgic|warm|acoustic
+18,Sunday Groove,Funktown Five,funk,happy,0.78,112,0.88,0.86,0.42,79,1970s,euphoric|danceable|uplifting
