@@ -1,304 +1,277 @@
-# 🎵 Music Recommender Simulation
+# VibeFinder 2.0 — Applied AI Music Recommendation System
 
-## Project Summary
-
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-This simulation builds a content-based music recommender that matches songs to a user's taste profile using audio features and categorical labels. Unlike real-world systems that rely on millions of users' listening histories (collaborative filtering), this version focuses purely on song attributes — energy, mood, genre, valence, and acousticness — to compute a compatibility score for each song. The top-K scoring songs are returned as recommendations with a plain-language explanation of why each was chosen.
+> **Final Project — AI 110 | Extended from Module 3 Music Recommender Simulation**
 
 ---
 
-## How The System Works
+## Original Project
 
-Real-world recommenders like Spotify's Discover Weekly combine two strategies: **collaborative filtering** (finding users with similar listening histories and borrowing their taste) and **content-based filtering** (analyzing the audio attributes of songs themselves). At scale, Spotify processes billions of listening events and hundreds of audio features extracted from raw audio using machine learning models. This simulation focuses on content-based filtering with a small, hand-crafted dataset to make the logic transparent and inspectable.
+**Base project:** `ai110-module3show-musicrecommendersimulation-starter` (Module 3)
 
-**This version prioritizes:** matching a user's declared mood and genre context first, then fine-tuning by how close a song's energy and emotional tone (valence) are to the user's preference — mirroring the way a person might pick a playlist by vibe before worrying about specific sound texture.
+VibeFinder 1.0 was a content-based music recommendation engine that scored songs against a user preference profile using five weighted features: genre, mood, energy, valence, and acousticness. It demonstrated four scoring modes (default, genre_first, mood_first, energy_focused) and a greedy diversity penalty to avoid artist/genre repetition. The system produced transparent, auditable ranked playlists but had no input validation, no retrieval layer, and no way to measure recommendation quality.
 
 ---
 
-### Dataset
+## What's New in VibeFinder 2.0
 
-`data/songs.csv` contains **18 songs** across a diverse range of genres and moods:
-
-| Genres | Moods |
+| Feature | What was added |
 |---|---|
-| pop, indie pop, lofi, rock, jazz | happy, chill, intense, relaxed, moody |
-| synthwave, ambient, hip-hop, r&b | focused, nostalgic, romantic, peaceful |
-| classical, country, edm, metal, folk, funk | energetic, angry |
+| **Agentic Workflow** | 5-step orchestrator with fully observable intermediate output |
+| **RAG (Multi-Source Retrieval)** | Genre knowledge base (`genre_docs.json`) + song catalog queried before scoring |
+| **Confidence Scoring** | Every recommendation rated HIGH / MEDIUM / LOW with numeric score |
+| **Input Guardrails** | Validates genre, mood, energy, and popularity before any processing |
+| **Self-Critique** | Agent checks its own output for energy mismatch, genre gaps, artist duplicates |
+| **Persona Specialization** | Few-shot response templates adapt tone to user context (workout, study, default) |
+| **Test Harness** | 8-case evaluation script with pass/fail summary and average confidence report |
+| **Structured Logging** | All steps, guardrail triggers, and errors written to `logs/session.log` |
 
 ---
 
-### Song Object Features
-
-Each `Song` uses the following attributes:
-
-| Feature | Type | Role in Scoring |
-|---|---|---|
-| `genre` | categorical | Hard boundary — highest weight match bonus |
-| `mood` | categorical | Use-case label — second highest weight |
-| `energy` | float 0–1 | Proximity scored against user's target energy |
-| `valence` | float 0–1 | Emotional positivity — proximity scored |
-| `acousticness` | float 0–1 | Organic vs. electronic texture — proximity scored |
-
-*(`tempo_bpm` and `danceability` are in the data and available for future expansion.)*
-
----
-
-### UserProfile
-
-The user profile is a dictionary with these keys:
-
-```python
-user_prefs = {
-    "genre":       "pop",    # target genre (string)
-    "mood":        "happy",  # target mood context (string)
-    "energy":      0.8,      # target intensity (float 0–1)
-    "valence":     0.8,      # target emotional positivity (float 0–1)
-    "acousticness": 0.2,     # target texture (float 0–1)
-}
-```
-
-**Why this profile works for differentiation:** A user with `energy: 0.8` and `mood: happy` will clearly separate *Gym Hero* (pop/intense, energy 0.93) from *Library Rain* (lofi/chill, energy 0.35). Genre alone would miss *Rooftop Lights* (indie pop/happy) which is a strong match — so the numeric features catch cross-genre vibe alignment.
-
----
-
-### Algorithm Recipe — Scoring Rule (one song)
+## System Architecture
 
 ```
-score = (genre_match  × 2.0)
-      + (mood_match   × 1.0)
-      + (1 - |song.energy      - user.energy|)      × 1.5
-      + (1 - |song.valence     - user.valence|)     × 1.0
-      + (1 - |song.acousticness - user.acousticness|) × 0.5
-```
-
-- **Categorical match** = full weight if equal, 0 if not
-- **Proximity score** = `1 - |song_value - user_value|` (always 0–1 since features are on 0–1 scale)
-- **Maximum possible score** = 2.0 + 1.0 + 1.5 + 1.0 + 0.5 = **6.0**
-
-**Weight rationale:**
-- `genre` (2.0) — strongest style boundary; a metal fan won't enjoy ambient regardless of energy
-- `energy` (1.5) — most continuous and reliable vibe signal; paired with mood it defines intensity
-- `mood` (1.0) — important but sometimes genre already implies mood (rock → intense)
-- `valence` (1.0) — emotional positivity catches the happy/dark split within a genre
-- `acousticness` (0.5) — texture preference is flexible; lowest weight
-
----
-
-### Ranking Rule (full catalog)
-
-1. Run the scoring rule on every song in the 18-song catalog
-2. Sort all `(song, score)` pairs in descending order
-3. Return the top `k` results, each with a plain-language explanation
-
----
-
-### Data Flow — Mermaid Diagram
-
-```mermaid
-flowchart TD
-    A[User Profile\ngenre · mood · energy · valence · acousticness] --> B[Load songs.csv\n18 songs]
-    B --> C{For each song\nin catalog}
-    C --> D[Score genre match\n+2.0 if match]
-    C --> E[Score mood match\n+1.0 if match]
-    C --> F[Score energy proximity\n1 - energy diff × 1.5]
-    C --> G[Score valence proximity\n1 - valence diff × 1.0]
-    C --> H[Score acousticness proximity\n1 - acousticness diff × 0.5]
-    D & E & F & G & H --> I[Sum = total score\nmax 6.0]
-    I --> J[Rank all songs\nby score descending]
-    J --> K[Return Top K\nwith explanation]
+┌─────────────────────────────────────────────────────────────────┐
+│                        User Input (CLI)                         │
+│           { genre, mood, energy, popularity, tags }             │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Agent Orchestrator                           │
+│                       src/agent.py                              │
+│                                                                 │
+│  STEP 1: Profile Analysis ──► src/evaluator.py (guardrails)    │
+│            │  Validate genre, mood, energy range               │
+│            │  Block invalid input before processing            │
+│            ▼                                                    │
+│  STEP 2: RAG Retrieval ─────► src/retriever.py                 │
+│            │  Source 1: data/songs.csv  (song catalog)         │
+│            │  Source 2: data/genre_docs.json  (knowledge base) │
+│            │  Returns: candidates + genre/mood context         │
+│            ▼                                                    │
+│  STEP 3: Scoring ───────────► src/recommender.py               │
+│            │  Weighted feature scoring (genre, mood, energy)   │
+│            │  Diversity penalty (artist/genre dedup)           │
+│            ▼                                                    │
+│  STEP 4: Self-Critique ─────► src/evaluator.py                 │
+│            │  Check: top confidence, genre coverage            │
+│            │  Check: energy vs genre norms, artist duplicates  │
+│            ▼                                                    │
+│  STEP 5: Final Response ────► Persona templates (few-shot)     │
+│            │  Attach confidence labels, pick persona tone      │
+│            ▼                                                    │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+              ┌──────────────┴─────────────┐
+              ▼                            ▼
+   Ranked Playlist + Confidence     logs/session.log
+   (stdout table)                   (structured log)
+              │
+              ▼
+   ┌──────────────────────┐
+   │   Test Harness       │
+   │  tests/test_harness  │
+   │  8 cases, pass/fail  │
+   │  + confidence summary│
+   └──────────────────────┘
 ```
 
 ---
 
-### Expected Bias
+## Project Structure
 
-> "This system may over-prioritize genre, causing songs with a perfect mood and energy match but a different genre label to rank lower than they deserve. A chill hip-hop track might lose to a mediocre lofi track just because the genre string matches. Additionally, the system treats all users as having the same 'taste shape' — it cannot learn that one user is flexible on genre but strict on energy."
+```
+applied-ai-system-final/
+├── src/
+│   ├── agent.py          # Agentic orchestrator (5-step workflow)
+│   ├── recommender.py    # Core scoring engine (Module 3 base)
+│   ├── retriever.py      # RAG multi-source retrieval
+│   ├── evaluator.py      # Confidence scoring + guardrails
+│   ├── logger.py         # Structured logging
+│   └── main.py           # CLI demo (3 demos: profiles, modes, guardrails)
+├── data/
+│   ├── songs.csv         # 18-song catalog with 13 features
+│   └── genre_docs.json   # Genre knowledge base (15 genres, mood context)
+├── tests/
+│   ├── test_recommender.py   # Original unit tests (Module 3)
+│   └── test_harness.py       # New evaluation harness (8 test cases)
+├── assets/               # Architecture diagrams and screenshots
+├── logs/                 # Auto-created; session.log written at runtime
+├── requirements.txt
+└── README.md
+```
 
 ---
 
-## Getting Started
+## Setup Instructions
 
-### Setup
+### 1. Clone the repository
 
-1. Create a virtual environment (optional but recommended):
+```bash
+git clone https://github.com/seanclemons/applied-ai-system-final.git
+cd applied-ai-system-final
+```
 
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
+### 2. Create and activate a virtual environment
 
-2. Install dependencies
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the app:
+### 4. Run the full agent demo
 
 ```bash
 python -m src.main
 ```
 
-### Running Tests
-
-Run the starter tests with:
+### 5. Run the test harness
 
 ```bash
-pytest
+python -m tests.test_harness
 ```
 
-You can add more tests in `tests/test_recommender.py`.
+### 6. Run the original unit tests
+
+```bash
+pytest tests/test_recommender.py -v
+```
 
 ---
 
-## Experiments You Tried
+## Sample Interactions
 
-Use this section to document the experiments you ran. For example:
+### Example 1 — High-Energy Pop (full agent, verbose)
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+```
+  [AGENT STEP 1] Profile Analysis
+    • genre: pop
+    • mood: happy
+    • energy: 0.8
+    ✓ Profile validated — no issues found.
 
----
+  [AGENT STEP 2] RAG Retrieval
+    • sources: songs_csv, genre_docs_json
+    • genre matches: 3
+    • mood matches: 4
+    • total candidates: 12
+    ℹ Typical use cases: parties, workouts, commute, background music
 
-## Limitations and Risks
+  [AGENT STEP 3] Scoring
+    #1 Sunrise City by Neon Echo — score 7.41
+    #2 Sunday Groove by Funktown Five — score 5.25
 
-Summarize some limitations of your recommender.
+  [AGENT STEP 4] Self-Critique
+    ✓ No quality issues detected.
 
-Examples:
+  [AGENT STEP 5] Final Response
+    • persona: default
+    • overall confidence: 0.74
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+  PROFILE : High-Energy Pop
+  PERSONA : default  |  overall confidence: 0.74  |  steps: 5/5
 
-You will go deeper on this in your model card.
+  Rank  Title          Artist         Genre  Score  Conf
+  #1    Sunrise City   Neon Echo      pop    7.41   1.00 [HIGH]
+  #2    Sunday Groove  Funktown Five  funk   5.25   0.88 [HIGH]
+```
 
----
+### Example 2 — Guardrail blocking invalid mood
 
-## Reflection
+```
+  Input: Invalid mood 'hyped'
 
-Read and complete `model_card.md`:
+  [AGENT STEP 1] Profile Analysis
+    • mood: hyped
+    ⚠ GUARDRAIL: mood 'hyped' is not recognized
 
-[**Model Card**](model_card.md)
+  ✓ Guardrail activated — system safely blocked invalid request.
+  → Validation failed: mood 'hyped' is not recognized
+```
 
-Write 1 to 2 paragraphs here about what you learned:
+### Example 3 — Test harness summary
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+```
+  Testing: High-Energy Pop ... PASS
+  Testing: Chill Lofi Study ... PASS
+  Testing: Deep Intense Rock ... PASS
+  Testing: Adversarial: Wrong Energy for Genre ... PASS
+  Testing: Guardrail: Invalid Mood ... PASS
+  Testing: Guardrail: Energy Out of Range ... PASS
+  Testing: Edge Case: Zero Popularity ... PASS
+  Testing: Funk Groove ... PASS
 
-
----
-
-## 7. `model_card_template.md`
-
-Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
-
-```markdown
-# 🎧 Model Card - Music Recommender Simulation
-
-## 1. Model Name
-
-Give your recommender a name, for example:
-
-> VibeFinder 1.0
-
----
-
-## 2. Intended Use
-
-- What is this system trying to do
-- Who is it for
-
-Example:
-
-> This model suggests 3 to 5 songs from a small catalog based on a user's preferred genre, mood, and energy level. It is for classroom exploration only, not for real users.
-
----
-
-## 3. How It Works (Short Explanation)
-
-Describe your scoring logic in plain language.
-
-- What features of each song does it consider
-- What information about the user does it use
-- How does it turn those into a number
-
-Try to avoid code in this section, treat it like an explanation to a non programmer.
-
----
-
-## 4. Data
-
-Describe your dataset.
-
-- How many songs are in `data/songs.csv`
-- Did you add or remove any songs
-- What kinds of genres or moods are represented
-- Whose taste does this data mostly reflect
+  ======================================================================
+    VIBEFINDER AGENT — TEST HARNESS SUMMARY
+  ======================================================================
+    Total tests   : 8
+    Passed        : 8  ✓
+    Failed        : 0  ✗
+    Avg confidence: 0.52
+  ======================================================================
+    Result: 8/8 tests passed (100%)
+```
 
 ---
 
-## 5. Strengths
+## Design Decisions
 
-Where does your recommender work well
+**Why an agentic pipeline instead of a single function?**
+Separating retrieval, scoring, critique, and output into distinct steps makes each component independently testable and auditable. If the system gives a bad result, the logged steps show exactly where the failure occurred.
 
-You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
+**Why a local knowledge base for RAG instead of a web API?**
+The system is designed to run fully offline without API keys. The `genre_docs.json` knowledge base provides rich contextual grounding (energy ranges, mood context, use cases) that meaningfully improves critique quality compared to scoring alone.
 
----
+**Why rule-based confidence scoring instead of a neural model?**
+The recommender's maximum possible score is deterministic (6.0 points). Normalizing raw scores to [0, 1] produces honest, calibrated confidence values without requiring an external model or training data.
 
-## 6. Limitations and Bias
-
-Where does your recommender struggle
-
-Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
+**Trade-offs:**
+- The 18-song catalog limits genre diversity — single-song genres produce low-confidence results by design, which the self-critique step flags correctly.
+- Persona selection is heuristic (mood + energy threshold) rather than learned — this is transparent and easy to audit but may feel simplistic for edge cases.
 
 ---
 
-## 7. Evaluation
+## Testing Summary
 
-How did you check your system
+8 test cases were run across the evaluation harness:
 
-Examples:
-- You tried multiple user profiles and wrote down whether the results matched your expectations
-- You compared your simulation to what a real app like Spotify or YouTube tends to recommend
-- You wrote tests for your scoring logic
+| Category | Cases | Result |
+|---|---|---|
+| Core profiles (pop, lofi, rock) | 3 | All passed — correct top results, confidence >= 0.60 |
+| Adversarial (wrong energy for genre) | 1 | Passed — self-critique correctly flagged energy mismatch |
+| Guardrail tests (invalid mood, out-of-range energy) | 2 | Passed — both correctly rejected before scoring |
+| Edge cases (zero popularity, rare genre) | 2 | Passed — results produced with appropriate low confidence |
 
-You do not need a numeric metric, but if you used one, explain what it measures.
-
----
-
-## 8. Future Work
-
-If you had more time, how would you improve this recommender
-
-Examples:
-
-- Add support for multiple users and "group vibe" recommendations
-- Balance diversity of songs instead of always picking the closest match
-- Use more features, like tempo ranges or lyric themes
+Average confidence across valid profiles: **0.74**. Guardrail tests produced 0.0 confidence (blocked). The system struggled most with single-song genres (funk, ambient) where catalog thinness limits recommendation diversity — the critique layer surfaces this automatically.
 
 ---
 
-## 9. Personal Reflection
+## Reflection on AI Collaboration and System Design
 
-A few sentences about what you learned:
+### How AI was used
+Claude Code was used throughout this project for architecture planning, code generation, debugging import errors, and structuring the test harness. Prompts were iterative — each component was designed in conversation, reviewed, and refined before moving to the next.
 
-- What surprised you about how your system behaved
-- How did building this change how you think about real music recommenders
-- Where do you think human judgment still matters, even if the model seems "smart"
+### One helpful AI suggestion
+When designing the retrieval layer, the AI suggested separating multi-source retrieval into three priority tiers (genre matches → mood matches → energy proximity) rather than a flat sort. This directly improved the quality of candidates passed to the scorer and made the retrieval logic easier to explain and debug.
 
+### One flawed AI suggestion
+An early draft of the confidence scoring used `score / max_possible_score` where `max_possible_score` was dynamically computed per-query based on the weights active in the scoring mode. This made confidence values incomparable across modes (a score of 0.80 in `genre_first` meant something different than 0.80 in `mood_first`). The fix was to use a fixed normalization constant (6.0) so confidence is always on the same scale regardless of mode.
+
+### Limitations and future improvements
+- **Catalog size**: 18 songs is too small for real-world use. The system is architecturally ready for a larger dataset — `songs.csv` can be replaced with any CSV matching the schema.
+- **Genre lock-in bias**: Genre still contributes 2.0/6.0 (33%) of the max score, which can override better energy/mood matches from adjacent genres.
+- **No user history**: The system has no memory of past plays or ratings. Adding a feedback loop (thumbs up/down) would enable adaptive personalization over time.
+- **Persona heuristics**: The three personas (default, workout_coach, study_buddy) cover common cases but a production system would learn persona from interaction history.
+#   a p p l i e d - a i - s y s t e m - f i n a l  
+ 
