@@ -293,3 +293,127 @@
 2026-04-19 23:27:25,214 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
 2026-04-19 23:27:25,215 [INFO] [STEP 1] Profile Analysis
 2026-04-19 23:27:25,215 [WARNING] [GUARDRAIL] genre: missing value
+2026-04-19 23:38:09,142 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:38:09,143 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:38:09,145 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:38:09,145 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:38:09,146 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:38:09,146 [INFO] [STEP 5] Final Response
+2026-04-19 23:39:44,097 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:39:44,097 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:39:44,099 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:39:44,099 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:39:44,100 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:39:44,100 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:39,949 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:39,949 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:39,950 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:39,951 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:39,951 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:39,951 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,521 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,521 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,523 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,523 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,523 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,524 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,526 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,526 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,529 [INFO] [RETRIEVAL] query='lofi' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,529 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,529 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,529 [WARNING] [SELF-CRITIQUE] Artist diversity issue: {'LoRoom'} appear more than once in top results.
+2026-04-19 23:40:41,530 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,531 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,532 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,534 [INFO] [RETRIEVAL] query='rock' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,534 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,534 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,534 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,536 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,537 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,539 [INFO] [RETRIEVAL] query='metal' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,539 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,540 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,540 [WARNING] [SELF-CRITIQUE] Requested energy (0.1) is below typical range for 'metal' (0.8–1.0). Results may feel inconsistent.
+2026-04-19 23:40:41,541 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,542 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,542 [WARNING] [GUARDRAIL] mood: unrecognized value 'hyped'
+2026-04-19 23:40:41,544 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,544 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
+2026-04-19 23:40:41,546 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,547 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,549 [INFO] [RETRIEVAL] query='ambient' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,549 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,550 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,550 [INFO] [STEP 5] Final Response
+2026-04-19 23:40:41,552 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:40:41,553 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:40:41,555 [INFO] [RETRIEVAL] query='funk' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:40:41,555 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:40:41,555 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:40:41,555 [INFO] [STEP 5] Final Response
+2026-04-19 23:42:17,025 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:42:17,026 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:42:17,027 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:42:17,027 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:42:17,027 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:42:17,028 [INFO] [STEP 5] Final Response
+2026-04-19 23:43:12,828 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:43:12,828 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:43:12,829 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:43:12,829 [INFO] [STEP 3] Scoring | mode=mood_first diversity=True k=5
+2026-04-19 23:43:12,829 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:43:12,830 [INFO] [STEP 5] Final Response
+2026-04-19 23:43:56,053 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:43:56,053 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:43:56,054 [INFO] [RETRIEVAL] query='metal' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:43:56,055 [INFO] [STEP 3] Scoring | mode=mood_first diversity=True k=5
+2026-04-19 23:43:56,055 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:43:56,055 [WARNING] [SELF-CRITIQUE] Requested energy (0.1) is below typical range for 'metal' (0.8–1.0). Results may feel inconsistent.
+2026-04-19 23:43:56,055 [INFO] [STEP 5] Final Response
+2026-04-19 23:44:31,208 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:44:31,208 [WARNING] [GUARDRAIL] mood: unrecognized value 'hyped'
+2026-04-19 23:44:31,209 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
+2026-04-19 23:45:01,773 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,773 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,776 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,776 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,777 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,777 [INFO] [STEP 5] Final Response
+2026-04-19 23:45:01,779 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,780 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,782 [INFO] [RETRIEVAL] query='lofi' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,783 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,784 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,784 [WARNING] [SELF-CRITIQUE] Artist diversity issue: {'LoRoom'} appear more than once in top results.
+2026-04-19 23:45:01,784 [INFO] [STEP 5] Final Response
+2026-04-19 23:45:01,787 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,787 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,791 [INFO] [RETRIEVAL] query='rock' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,791 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,792 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,793 [INFO] [STEP 5] Final Response
+2026-04-19 23:45:01,795 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,796 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,799 [INFO] [RETRIEVAL] query='metal' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,799 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,800 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,801 [WARNING] [SELF-CRITIQUE] Requested energy (0.1) is below typical range for 'metal' (0.8–1.0). Results may feel inconsistent.
+2026-04-19 23:45:01,801 [INFO] [STEP 5] Final Response
+2026-04-19 23:45:01,804 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,804 [WARNING] [GUARDRAIL] mood: unrecognized value 'hyped'
+2026-04-19 23:45:01,806 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,806 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
+2026-04-19 23:45:01,808 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,808 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,810 [INFO] [RETRIEVAL] query='ambient' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,810 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,811 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,811 [INFO] [STEP 5] Final Response
+2026-04-19 23:45:01,813 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:45:01,814 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:45:01,816 [INFO] [RETRIEVAL] query='funk' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:45:01,816 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:45:01,816 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:45:01,817 [INFO] [STEP 5] Final Response
