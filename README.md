@@ -103,6 +103,20 @@ applied-ai-system-final/
 
 ---
 
+## Demo Walkthrough
+
+Watch the full end-to-end demo (5 minutes) including the recommender, guardrail tester, and test harness:
+
+**[▶ Watch on Loom](https://www.loom.com/share/dc330a59c16b4e668422a9a193f9a11a)**
+
+The demo covers:
+- Profile: High-Energy Pop → 5 agent steps → ranked results with confidence scores
+- Profile: Chill Lofi Study → `study_buddy` persona auto-selected
+- Guardrail test: invalid mood `hyped` and energy `1.5` both blocked before scoring
+- Test harness: 8/8 tests passing with pass/fail summary
+
+---
+
 ## Setup Instructions
 
 ### 1. Clone the repository
