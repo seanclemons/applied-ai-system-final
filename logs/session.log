@@ -245,3 +245,51 @@
 2026-04-19 21:55:37,030 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
 2026-04-19 21:55:37,030 [INFO] [STEP 1] Profile Analysis
 2026-04-19 21:55:37,030 [WARNING] [GUARDRAIL] genre: missing value
+2026-04-19 23:27:25,187 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,188 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,190 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,190 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:27:25,191 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,191 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,191 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,191 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,193 [INFO] [RETRIEVAL] query='lofi' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,193 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:27:25,194 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,194 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,194 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,195 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,196 [INFO] [RETRIEVAL] query='rock' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,196 [INFO] [STEP 3] Scoring | mode=default diversity=True k=5
+2026-04-19 23:27:25,197 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,197 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,199 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,199 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,201 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,201 [INFO] [STEP 3] Scoring | mode=default diversity=False k=5
+2026-04-19 23:27:25,201 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,202 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,203 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,203 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,204 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,204 [INFO] [STEP 3] Scoring | mode=genre_first diversity=False k=5
+2026-04-19 23:27:25,205 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,205 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,206 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,206 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,207 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,208 [INFO] [STEP 3] Scoring | mode=mood_first diversity=False k=5
+2026-04-19 23:27:25,208 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,208 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,209 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,209 [INFO] [STEP 2] RAG Retrieval
+2026-04-19 23:27:25,211 [INFO] [RETRIEVAL] query='pop' hits=12 sources=['songs_csv', 'genre_docs_json']
+2026-04-19 23:27:25,211 [INFO] [STEP 3] Scoring | mode=energy_focused diversity=False k=5
+2026-04-19 23:27:25,211 [INFO] [STEP 4] Self-Critique
+2026-04-19 23:27:25,211 [INFO] [STEP 5] Final Response
+2026-04-19 23:27:25,212 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,212 [WARNING] [GUARDRAIL] mood: unrecognized value 'hyped'
+2026-04-19 23:27:25,214 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,214 [WARNING] [GUARDRAIL] energy: value 1.5 out of range
+2026-04-19 23:27:25,215 [INFO] [STEP 1] Profile Analysis
+2026-04-19 23:27:25,215 [WARNING] [GUARDRAIL] genre: missing value
