@@ -1,0 +1,137 @@
+{
+  "genres": {
+    "pop": {
+      "description": "Pop music is characterized by catchy melodies, verse-chorus structure, and broad mainstream appeal. Typically features polished production, strong hooks, and upbeat or relatable themes.",
+      "typical_energy_range": [0.5, 0.95],
+      "typical_moods": ["happy", "uplifting", "danceable", "energetic"],
+      "related_genres": ["indie pop", "synth-pop", "dance pop"],
+      "instruments": ["synthesizers", "electric guitar", "drums", "bass"],
+      "use_cases": ["parties", "workouts", "commute", "background music"]
+    },
+    "lofi": {
+      "description": "Lo-fi (low fidelity) hip-hop blends mellow beats, vinyl crackle, and jazzy samples to create a relaxed, nostalgic atmosphere. Often used for studying or unwinding.",
+      "typical_energy_range": [0.2, 0.55],
+      "typical_moods": ["chill", "focused", "calm", "nostalgic"],
+      "related_genres": ["chillhop", "jazz hop", "ambient"],
+      "instruments": ["sampled piano", "drum machines", "bass", "vinyl texture"],
+      "use_cases": ["studying", "focus work", "relaxing", "sleep"]
+    },
+    "rock": {
+      "description": "Rock music is driven by electric guitars, strong rhythms, and an emphasis on live performance energy. Ranges from classic rock to alternative, grunge, and hard rock.",
+      "typical_energy_range": [0.6, 0.98],
+      "typical_moods": ["intense", "powerful", "aggressive", "rebellious"],
+      "related_genres": ["metal", "alternative", "indie rock", "punk"],
+      "instruments": ["electric guitar", "bass guitar", "drums", "vocals"],
+      "use_cases": ["workouts", "driving", "concerts", "motivation"]
+    },
+    "jazz": {
+      "description": "Jazz is an improvisational genre rooted in blues and swing, featuring complex harmonies, syncopated rhythms, and expressive solos. Creates sophisticated, relaxed, or atmospheric moods.",
+      "typical_energy_range": [0.2, 0.65],
+      "typical_moods": ["relaxed", "sophisticated", "romantic", "nostalgic"],
+      "related_genres": ["blues", "soul", "bossa nova", "lofi"],
+      "instruments": ["trumpet", "saxophone", "piano", "upright bass", "drums"],
+      "use_cases": ["dinner", "coffee shops", "studying", "background ambiance"]
+    },
+    "ambient": {
+      "description": "Ambient music prioritizes texture, atmosphere, and mood over traditional melody or rhythm. Creates immersive soundscapes for focus, relaxation, or meditation.",
+      "typical_energy_range": [0.05, 0.4],
+      "typical_moods": ["peaceful", "chill", "meditative", "atmospheric"],
+      "related_genres": ["new age", "drone", "lofi", "classical"],
+      "instruments": ["synthesizers", "pads", "field recordings", "piano"],
+      "use_cases": ["meditation", "sleep", "focus", "relaxation"]
+    },
+    "metal": {
+      "description": "Metal is a high-intensity genre defined by heavy distorted guitars, aggressive drumming, and powerful vocals. Emphasizes technical skill and emotional catharsis.",
+      "typical_energy_range": [0.8, 1.0],
+      "typical_moods": ["angry", "intense", "powerful", "aggressive"],
+      "related_genres": ["rock", "hardcore", "death metal", "thrash"],
+      "instruments": ["distorted guitar", "double-kick drums", "bass", "screamed/clean vocals"],
+      "use_cases": ["intense workouts", "stress relief", "gaming", "driving"]
+    },
+    "edm": {
+      "description": "Electronic Dance Music (EDM) is built around synthesized sounds, programmed beats, and high-energy drops designed to fill dancefloors. Includes sub-genres like house, techno, and dubstep.",
+      "typical_energy_range": [0.75, 1.0],
+      "typical_moods": ["energetic", "euphoric", "intense", "danceable"],
+      "related_genres": ["house", "techno", "dubstep", "trance", "synthwave"],
+      "instruments": ["synthesizers", "drum machines", "samplers", "bass drops"],
+      "use_cases": ["clubs", "raves", "workouts", "gaming"]
+    },
+    "synthwave": {
+      "description": "Synthwave is a retrowave genre inspired by 1980s film soundtracks, featuring analog synthesizers, driving basslines, and nostalgic atmosphere.",
+      "typical_energy_range": [0.55, 0.85],
+      "typical_moods": ["moody", "nostalgic", "atmospheric", "energetic"],
+      "related_genres": ["edm", "chillwave", "darksynth", "pop"],
+      "instruments": ["analog synths", "drum machines", "electric bass", "arpeggiated leads"],
+      "use_cases": ["night driving", "gaming", "creative work", "workouts"]
+    },
+    "indie pop": {
+      "description": "Indie pop blends the melodic sensibility of pop with independent, DIY production aesthetics. Often features introspective lyrics, jangly guitars, and a warm, personal sound.",
+      "typical_energy_range": [0.4, 0.8],
+      "typical_moods": ["happy", "introspective", "romantic", "uplifting"],
+      "related_genres": ["pop", "indie rock", "folk pop", "dream pop"],
+      "instruments": ["acoustic/electric guitar", "keyboards", "drums", "vocals"],
+      "use_cases": ["casual listening", "road trips", "studying", "socializing"]
+    },
+    "classical": {
+      "description": "Classical music spans centuries of orchestral and chamber compositions emphasizing formal structure, dynamic contrast, and emotional depth without vocals.",
+      "typical_energy_range": [0.1, 0.7],
+      "typical_moods": ["peaceful", "dramatic", "nostalgic", "romantic"],
+      "related_genres": ["ambient", "neo-classical", "film score"],
+      "instruments": ["orchestra", "piano", "strings", "woodwinds", "brass"],
+      "use_cases": ["studying", "relaxation", "sleep", "concentration"]
+    },
+    "hip-hop": {
+      "description": "Hip-hop combines rhythmic vocal delivery (rap) over sampled or produced beats. Covers a wide emotional range from introspective to hype, with strong cultural roots.",
+      "typical_energy_range": [0.5, 0.95],
+      "typical_moods": ["confident", "energetic", "introspective", "aggressive"],
+      "related_genres": ["r&b", "trap", "lofi", "soul"],
+      "instruments": ["sampler", "drum machine", "bass", "turntables", "vocals"],
+      "use_cases": ["workouts", "commute", "parties", "creative work"]
+    },
+    "r&b": {
+      "description": "Rhythm and Blues (R&B) fuses soul, funk, and pop elements with smooth vocals, rich harmonies, and groove-oriented production.",
+      "typical_energy_range": [0.35, 0.8],
+      "typical_moods": ["romantic", "smooth", "soulful", "confident"],
+      "related_genres": ["soul", "funk", "hip-hop", "pop"],
+      "instruments": ["electric piano", "bass", "drums", "horns", "vocals"],
+      "use_cases": ["romance", "evening listening", "driving", "dinner"]
+    },
+    "country": {
+      "description": "Country music emphasizes storytelling, twangy guitars, and themes of rural life, love, and loss. Ranges from traditional to modern country-pop crossovers.",
+      "typical_energy_range": [0.35, 0.85],
+      "typical_moods": ["happy", "nostalgic", "heartfelt", "carefree"],
+      "related_genres": ["folk", "americana", "bluegrass", "pop"],
+      "instruments": ["acoustic guitar", "steel guitar", "fiddle", "banjo", "vocals"],
+      "use_cases": ["road trips", "backyard gatherings", "casual listening", "driving"]
+    },
+    "funk": {
+      "description": "Funk is a groove-heavy genre emphasizing syncopated basslines, rhythmic guitar, and tight ensemble playing. Created to make people dance.",
+      "typical_energy_range": [0.55, 0.9],
+      "typical_moods": ["happy", "danceable", "energetic", "confident"],
+      "related_genres": ["soul", "r&b", "jazz", "pop"],
+      "instruments": ["electric bass", "rhythm guitar", "horns", "drums", "vocals"],
+      "use_cases": ["parties", "dancing", "workouts", "commute"]
+    },
+    "folk": {
+      "description": "Folk music is rooted in acoustic instrumentation and narrative songwriting traditions. Emphasizes authenticity, storytelling, and emotional intimacy.",
+      "typical_energy_range": [0.15, 0.6],
+      "typical_moods": ["nostalgic", "peaceful", "introspective", "heartfelt"],
+      "related_genres": ["country", "indie folk", "acoustic", "americana"],
+      "instruments": ["acoustic guitar", "banjo", "fiddle", "harmonica", "vocals"],
+      "use_cases": ["quiet evenings", "studying", "road trips", "campfires"]
+    }
+  },
+  "mood_context": {
+    "happy": "Upbeat, positive, feel-good energy. Good for social settings, morning routines, and activities that benefit from positive reinforcement.",
+    "chill": "Relaxed, laid-back, low-stress. Ideal for winding down, background listening, or any context requiring calm focus.",
+    "intense": "High arousal, focused aggression or passion. Best for peak-performance moments like workouts or competitive gaming.",
+    "romantic": "Warm, intimate, emotionally expressive. Suited for date nights, quiet evenings, or reflective moments.",
+    "nostalgic": "Evokes memory and longing. Good for introspection, road trips, or revisiting personal history.",
+    "peaceful": "Serene and calming. Ideal for meditation, sleep, or stress recovery.",
+    "focused": "Mentally engaging without distraction. Best for deep work, studying, or creative flow states.",
+    "energetic": "High physical energy, movement-oriented. Great for exercise, dancing, or high-activity tasks.",
+    "angry": "Cathartic, high-intensity release. Useful for stress relief through aggressive musical expression.",
+    "moody": "Atmospheric, emotionally ambiguous. Suits introspective or creative contexts.",
+    "relaxed": "Gentle, unhurried pace. Good for casual afternoons, light social settings, or unwinding."
+  }
+}
