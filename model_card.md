@@ -4,13 +4,13 @@
 
 ## 1. Model Name
 
-**VibeFinder 1.0**
+**SoundMatch 1.0**
 
 ---
 
 ## 2. Goal / Task
 
-VibeFinder tries to predict which songs a person will enjoy right now, based on the vibe they describe. Given a user's preferred genre, mood, energy level, emotional tone, and acoustic texture, it scans a catalog of 18 songs and returns the top 5 best matches — ranked from most to least compatible. It is not trying to learn over time or guess hidden preferences; it simply asks "how close is each song to what this person said they want?" and sorts accordingly.
+SoundMatch tries to predict which songs a person will enjoy right now, based on the vibe they describe. Given a user's preferred genre, mood, energy level, emotional tone, and acoustic texture, it scans a catalog of 18 songs and returns the top 5 best matches — ranked from most to least compatible. It is not trying to learn over time or guess hidden preferences; it simply asks "how close is each song to what this person said they want?" and sorts accordingly.
 
 ---
 
@@ -38,7 +38,7 @@ The catalog is stored in `data/songs.csv` and contains **18 songs**, each with 1
 
 ## 4. Algorithm Summary
 
-VibeFinder uses a **weighted scoring rule** to judge every song in the catalog against the user's preferences. Think of it like a judge at a cooking competition who grades each dish on five criteria, with some criteria worth more points than others.
+SoundMatch uses a **weighted scoring rule** to judge every song in the catalog against the user's preferences. Think of it like a judge at a cooking competition who grades each dish on five criteria, with some criteria worth more points than others.
 
 For each song, the system awards points in five categories:
 

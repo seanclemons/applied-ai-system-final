@@ -1,5 +1,5 @@
 """
-VibeFinder Test Harness
+SoundMatch Test Harness
 Runs the agent on predefined profiles and prints a pass/fail summary.
 
 Usage:
@@ -209,7 +209,7 @@ def print_summary(results: list[dict]):
 
     sep = "=" * 70
     print(f"\n{sep}")
-    print("  VIBEFINDER AGENT -- TEST HARNESS SUMMARY")
+    print("  SOUNDMATCH AGENT -- TEST HARNESS SUMMARY")
     print(sep)
     print(f"  Total tests   : {total}")
     print(f"  Passed        : {passed}  [OK]")
@@ -236,7 +236,7 @@ def print_summary(results: list[dict]):
 
 
 def main():
-    print("\nRunning VibeFinder Test Harness...\n")
+    print("\nRunning SoundMatch Test Harness...\n")
     results = []
     for case in TEST_CASES:
         print(f"  Testing: {case['name']} ...", end=" ", flush=True)

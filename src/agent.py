@@ -1,5 +1,5 @@
 """
-VibeFinder Agent — multi-step agentic orchestrator.
+SoundMatch Agent — multi-step agentic orchestrator.
 
 Steps (each printed and logged so intermediate work is observable):
   1. Profile Analysis   — parse and validate user preferences

@@ -16,7 +16,7 @@ logging.basicConfig(
     ],
 )
 
-logger = logging.getLogger("vibefinder")
+logger = logging.getLogger("soundmatch")
 
 
 def log_agent_step(step_num: int, step_name: str, detail: str = ""):

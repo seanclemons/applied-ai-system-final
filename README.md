@@ -1,4 +1,4 @@
-# VibeFinder 2.0 — Applied AI Music Recommendation System
+# SoundMatch 2.0 — Applied AI Music Recommendation System
 
 > **Final Project — AI 110 | Extended from Module 3 Music Recommender Simulation**
 
@@ -8,11 +8,11 @@
 
 **Base project:** `ai110-module3show-musicrecommendersimulation-starter` (Module 3)
 
-VibeFinder 1.0 was a content-based music recommendation engine that scored songs against a user preference profile using five weighted features: genre, mood, energy, valence, and acousticness. It demonstrated four scoring modes (default, genre_first, mood_first, energy_focused) and a greedy diversity penalty to avoid artist/genre repetition. The system produced transparent, auditable ranked playlists but had no input validation, no retrieval layer, and no way to measure recommendation quality.
+SoundMatch 1.0 was a content-based music recommendation engine that scored songs against a user preference profile using five weighted features: genre, mood, energy, valence, and acousticness. It demonstrated four scoring modes (default, genre_first, mood_first, energy_focused) and a greedy diversity penalty to avoid artist/genre repetition. The system produced transparent, auditable ranked playlists but had no input validation, no retrieval layer, and no way to measure recommendation quality.
 
 ---
 
-## What's New in VibeFinder 2.0
+## What's New in SoundMatch 2.0
 
 | Feature | What was added |
 |---|---|

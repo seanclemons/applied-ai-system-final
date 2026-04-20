@@ -1,5 +1,5 @@
 """
-VibeFinder — Applied AI Music Recommendation System
+SoundMatch — Applied AI Music Recommendation System
 Extended from the Module 3 Music Recommender Simulation.
 
 Run with:  python -m src.main
@@ -123,7 +123,7 @@ def main() -> None:
     sep = "\n" + "#" * 72
 
     print(sep)
-    print("  VIBEFINDER — AGENTIC MUSIC RECOMMENDATION SYSTEM")
+    print("  SOUNDMATCH — AGENTIC MUSIC RECOMMENDATION SYSTEM")
     print("  Each run executes 5 observable agent steps:")
     print("  1. Profile Analysis  2. RAG Retrieval  3. Scoring")
     print("  4. Self-Critique     5. Final Response")
